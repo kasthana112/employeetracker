@@ -42,6 +42,7 @@ function startApp() {
           startApp();
         });
         break;
+        
       case 'View all employees':
         db.query('SELECT * FROM employees', (err, results) => {
           if (err) throw err;
@@ -49,6 +50,7 @@ function startApp() {
           startApp();
         });
         break;
+
       case 'Add a department':
         inquirer.prompt({
           type: 'input',
@@ -62,24 +64,51 @@ function startApp() {
           });
         });
         break;
+
       case 'Add a role':
-        // similar to add department
+        inquirer.prompt({
+        type: 'input',
+        name: 'name',
+        message: 'What is the name of the role?'
+      }).then(({ name }) => {
+        db.query('INSERT INTO role SET ?', { name }, (err, results) => {
+          if (err) throw err;
+          console.log(`${results.affectedRows} role added.`);
+          startApp();
+        })});
+
         break;
       case 'Add an employee':
-        // similar to add department
+        inquirer.prompt({
+          type: 'input',
+          name: 'first name, last name, role id, manager id',
+          message: 'What is the name of the employee?'
+        }).then(({ name }) => {
+          db.query('INSERT INTO role SET ?', { name }, (err, results) => {
+            if (err) throw err;
+            console.log(`${results.affectedRows} employee added.`);
+            startApp();
+          })});
+
         break;
       case 'Update employee role':
-        // similar to view all employees, but with inquirer prompt to select employee and role to update
+      
+        inquirer.prompt({
+          db.query('SELECT * FROM employees or role to update', (err, results) => {
+            if (err) throw err;
+            console.table(results);
+            startApp();
+          });
+          
         break;
-      case 'Exit':
-        db.end();
-        break;
-    }
-  });
-}
+        )}}
 
-db.connect((err) => {
-  if (err) throw err;
-  console.log(`Connected to the etracker_db database.`);
-  startApp();
-});
+     (({{case: 'Exit',
+        db.end(),
+      }}) => {
+        if (case === 'Exit') {
+          console.log('Goodbye!');
+          process.exit();
+        
+    }}));
+}
