@@ -24,16 +24,15 @@ function startApp() {
         'Add an employee',
         'Update employee role',
         'Exit'
-      ]
+     ]}])
     }
-  ]).then(({ action }) => {
-    switch (action) {
-      case 'View all departments':
-        db.query('SELECT * FROM department', (err, results) => {
-          if (err) throw err;
-          console.table(results);
-          startApp();
-        });
+    startApp();
+    function viewDepartments() {
+      db.query('SELECT * FROM department', (err, results) => {
+        if (err) throw err;
+        console.table(results);
+        startApp();
+      });
         break;
       case 'View all roles':
         db.query('SELECT * FROM roles', (err, results) => {
@@ -43,7 +42,7 @@ function startApp() {
         });
         break;
         
-      case 'View all employees':
+      function View:
         db.query('SELECT * FROM employees', (err, results) => {
           if (err) throw err;
           console.table(results);
@@ -92,23 +91,17 @@ function startApp() {
 
         break;
       case 'Update employee role':
-      
         inquirer.prompt({
-          db.query('SELECT * FROM employees or role to update', (err, results) => {
+          db.query('SELECT * FROM employees', (err, results) => {
             if (err) throw err;
             console.table(results);
             startApp();
-          });
+          }),
+        })
           
         break;
-        )}}
-
-     (({{case: 'Exit',
-        db.end(),
-      }}) => {
-        if (case === 'Exit') {
+        case 'Exit':
+          db.end();
           console.log('Goodbye!');
           process.exit();
-        
-    }}));
-}
+  
